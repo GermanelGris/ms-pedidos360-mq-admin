@@ -1,0 +1,30 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: ms-pedidos360-mq-admin
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:pedidos360}
+    password: ${RABBITMQ_PASSWORD:pedidos360}
+    virtual-host: /
+    connection-timeout: 3s
+
+pedidos360:
+  admin:
+    # API HTTP del plugin de administración de RabbitMQ (solo para listar recursos)
+    management-url: http://${RABBITMQ_HOST:localhost}:${RABBITMQ_MANAGEMENT_PORT:15672}
+    # Topología de la que depende el sistema: no se puede eliminar desde la API
+    protected-exchanges: cmd.direct, cmd.retry, cmd.dead.dlx
+    protected-queues: >-
+      q.cmd.email, q.cmd.email.retry, q.cmd.email.dlq,
+      q.cmd.kitchen, q.cmd.kitchen.retry, q.cmd.kitchen.dlq,
+      q.cmd.invoice, q.cmd.invoice.retry, q.cmd.invoice.dlq
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
