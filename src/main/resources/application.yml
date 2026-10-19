@@ -17,11 +17,15 @@ pedidos360:
     # API HTTP del plugin de administración de RabbitMQ (solo para listar recursos)
     management-url: http://${RABBITMQ_HOST:localhost}:${RABBITMQ_MANAGEMENT_PORT:15672}
     # Topología de la que depende el sistema: no se puede eliminar desde la API
-    protected-exchanges: cmd.direct, cmd.retry, cmd.dead.dlx
+    protected-exchanges: >-
+      cmd.direct, cmd.retry, cmd.dead.dlx,
+      orders.events, report.retry, report.dlx, audit.retry, audit.dlx
     protected-queues: >-
       q.cmd.email, q.cmd.email.retry, q.cmd.email.dlq,
       q.cmd.kitchen, q.cmd.kitchen.retry, q.cmd.kitchen.dlq,
-      q.cmd.invoice, q.cmd.invoice.retry, q.cmd.invoice.dlq
+      q.cmd.invoice, q.cmd.invoice.retry, q.cmd.invoice.dlq,
+      q.report.orders, q.report.orders.retry, q.report.orders.dlq,
+      q.audit.orders, q.audit.orders.retry, q.audit.orders.dlq
 
 management:
   endpoints:
