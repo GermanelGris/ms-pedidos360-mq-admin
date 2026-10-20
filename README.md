@@ -91,6 +91,6 @@ Además, el servicio aplica reglas que dependen del estado del broker. No se cre
 
 ## Autores
 
-Germán Maraboli & Camila Vera
+Germán Marabolí, Sebastián Velez & Camila Vera
 
 Proyecto Pedidos360 · DSY1107 Desarrollo Cloud Native I · Duoc UC
